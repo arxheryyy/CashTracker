@@ -12,14 +12,12 @@ saved = fileObj.readlines()
 length = len(saved)
 dividedLen = int(round(length/3, 0))
 for x in saved:
-    if z == 0:
-        for dividedLen:
-            comments.append(saved[z][:-1])
-            z = z+3
-    elif z == 1:
-        for divdedLen:
-            spendings.append(saved[z][:-1])
-            z = z+1
+    if z % 2 == 0:
+        comments.append(saved[z][:-1])
+        z = z+1
+    else:
+        spendings.append(saved[z][:-1])
+        z = z+1
 fileObj.close()
 while bool == False:
     print("Enter 1 to Check total spendings")
@@ -44,19 +42,18 @@ while bool == False:
             print("$" + str(spendings[y]) + " " + comments[y])
             y = y+1
     elif uInput == '3':
+        currentTime = strftime("%d-%m-%y", localtime())
         print("Enter Amount")
         amountIn = input()
         amount = float(amountIn)
         amount = round(amount, 2)
         spendings.append(amount)
         print("Enter Comment")
-        comment = input()
+        comment = input() + " " + currentTime
         comments.append(comment)
         entry = (comment + '\n' + str(amount) + '\n')
         fileObj = open(r"spendings.txt", "a")
         fileObj.writelines(entry)
-        currentTime = strftime("%y-%m-%d", localtime())
-        fileObj.writelines("Date" + currentTime)
         fileObj.close()
         print("Successfully added")
     elif uInput == '4':
